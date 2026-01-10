@@ -1,0 +1,24 @@
+{
+  "name": "Translator Extensions (v2)",
+  "description": "Translator Extensions (v2)",
+  "version": "2.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup-scripts/index.html",
+    "default_icon": "logoipsum-223.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["content-scripts/index.js"],
+      "css": ["content-scripts/index.css"],
+      "matches": ["http://*/*", "https://*/*"],
+      "all_frames": true
+    }
+  ],
+  "permissions": ["storage"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "@addon-example"
+    }
+  }
+}
