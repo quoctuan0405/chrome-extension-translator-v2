@@ -35,6 +35,12 @@ export const mockStreamText = ({ abortSignal }: MockStreamTextParams) => {
   ];
 
   async function* textStream() {
+    await new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
+
     for (const text of aiTexts) {
       if (abortSignal.aborted) break;
 

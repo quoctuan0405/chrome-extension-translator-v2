@@ -16,11 +16,13 @@ export type MessageListContainerHandler = {
 type Props = {
   ref?: React.Ref<MessageListContainerHandler>;
   messages?: ModelMessage[];
+  isLoading?: boolean;
 };
 
 export const MessageListContainerHandler: React.FC<Props> = ({
   ref,
   messages = [],
+  isLoading,
 }) => {
   // Scroll to bottom
   const containerRef = useRef<HTMLDivElement>(null);
@@ -120,6 +122,14 @@ export const MessageListContainerHandler: React.FC<Props> = ({
             )}
           </React.Fragment>
         ))}
+
+        {isLoading && (
+          <div className="flex flex-row flex-wrap gap-1 pl-3">
+            <div className="animate-bounce size-2 bg-neutral-300 rounded-full"></div>
+            <div className="animate-bounce size-2 bg-neutral-300 rounded-full delay-200"></div>
+            <div className="animate-bounce size-2 bg-neutral-300 rounded-full delay-400"></div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -157,6 +157,7 @@ export const TranslationWindow: React.FC<Props> = ({
           <MessageListContainerHandler
             ref={messageSectionRef}
             messages={messages}
+            isLoading={isLoading}
           />
         </ResizablePanel>
 
