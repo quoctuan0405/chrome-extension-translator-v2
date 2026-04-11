@@ -1,5 +1,6 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
+import { createListenerMiddleware, createSlice } from "@reduxjs/toolkit";
+import { setStorageData } from "./storage-data-slice";
 
 export type PositionPayload = {
   left: number;
@@ -43,3 +44,23 @@ export const { setVisibility, setPosition, togglePin } =
   translationWindowSlice.actions;
 
 export default translationWindowSlice.reducer;
+
+// Listener
+export const translationWindowListener = createListenerMiddleware();
+
+translationWindowListener.startListening({
+  actionCreator: setStorageData,
+  effect: async (action, listenerApi) => {
+    listenerApi.cancelActiveListeners();
+
+    if (action.payload.isOn) {
+      listenerApi.dispatch(
+        setPosition({
+          left: window.innerWidth / 2 + 100,
+          top: window.innerHeight / 2 - 250,
+        }),
+      );
+      listenerApi.dispatch(setVisibility(action.payload.isOn));
+    }
+  },
+});

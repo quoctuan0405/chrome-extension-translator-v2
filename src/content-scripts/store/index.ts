@@ -2,7 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import chatReducer, { chatListener } from "./slices/chat-slice";
 import storageDataReducer from "./slices/storage-data-slice";
-import translationWindowReducer from "./slices/translation-window-slice";
+import translationWindowReducer, {
+  translationWindowListener,
+} from "./slices/translation-window-slice";
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +13,10 @@ export const store = configureStore({
     translationWindow: translationWindowReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().prepend(chatListener.middleware),
+    getDefaultMiddleware().prepend(
+      chatListener.middleware,
+      translationWindowListener.middleware,
+    ),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
