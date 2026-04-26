@@ -27,7 +27,9 @@ export const translationWindowSlice = createSlice({
   reducers: {
     setVisibility: (state, action: PayloadAction<boolean>) => {
       state.isVisible = action.payload;
-      state.isPinned = false;
+      if (!action.payload) {
+        state.isPinned = false;
+      }
     },
     togglePin: (state) => {
       state.isPinned = !state.isPinned;
